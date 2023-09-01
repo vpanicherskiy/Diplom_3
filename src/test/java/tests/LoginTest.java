@@ -17,12 +17,16 @@ public class LoginTest extends BaseTest {
     @DisplayName("Вход по кнопке «Войти в аккаунт» на главной")
     public void mainPageLogin() {
         homePage().clickLoginButton();
+        loginPage().fillLoginForm(credentials);
+        Assert.assertEquals(homePage().getOrderButtonText(), Texts.HOME_PAGE_ORDER_BUTTON_TEXT.getText());
     }
 
     @Test
     @DisplayName("Вход через кнопку «Личный кабинет»")
     public void accountPageLogin() {
         header().clickProfile();
+        loginPage().fillLoginForm(credentials);
+        Assert.assertEquals(homePage().getOrderButtonText(), Texts.HOME_PAGE_ORDER_BUTTON_TEXT.getText());
     }
 
     @Test
@@ -31,6 +35,8 @@ public class LoginTest extends BaseTest {
         header().clickProfile();
         loginPage().clickRegistration();
         registrationPage().clickLoginLink();
+        loginPage().fillLoginForm(credentials);
+        Assert.assertEquals(homePage().getOrderButtonText(), Texts.HOME_PAGE_ORDER_BUTTON_TEXT.getText());
     }
 
     @Test
@@ -39,10 +45,6 @@ public class LoginTest extends BaseTest {
         header().clickProfile();
         loginPage().clickRestorePasswordLink();
         forgotPasswordPage().clickLoginLink();
-    }
-
-    @After
-    public void afterEach(){
         loginPage().fillLoginForm(credentials);
         Assert.assertEquals(homePage().getOrderButtonText(), Texts.HOME_PAGE_ORDER_BUTTON_TEXT.getText());
     }
